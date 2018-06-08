@@ -18,7 +18,7 @@ class SoundManager(object):
 		url = 'https://ssl.gstatic.com/dictionary/static/sounds/oxford/' + word + '--_gb_1.mp3'
 		try:
 			urllib.request.urlretrieve(url, 'sound/' + word + '.mp3')
-		except urllib.error.HTTPError:
+		except (urllib.error.HTTPError, urllib.error.URLError) as e:
 			pass
 
 	def downloadList(self, words):

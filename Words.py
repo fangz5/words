@@ -21,6 +21,7 @@ def enable(buttons):
 		app.enableButton(b)
 
 def refresh():
+	print(learned)
 	app.setLabel("learned", (" " * 5).join(list(map(lambda l: l[0], learned))))
 	app.setLabel("not learned", (" " * 5).join(list(map(lambda l: l[0], unlearned))))
 	if not unlearned:

@@ -2,37 +2,36 @@ import random
 
 class Record(object):
 	def __init__(self):
-		allWords = self._loadAll_()
+		self.allWords = self._load_('save.csv')
+		self.numWordsReview = 20
 
 	def _save_(self, words, fileName):
 		with open(fileName, 'w') as file:
 			for word in words:
 				file.write(word +',' + str(words[word]) + '\n')
 
-	def save(self, words):
-		self._save_(words, 'save')
-
 	def _load_(self, fileName):
-		words = []
+		words = {}
 		with open(fileName, 'r') as file:
 			for line in file:
 				word, weight = line.split(',')
-				words.append([word, int(weight)])
+				words[word] = int(weight)
 		return words
-
-	def _loadAll_(self):
-		self.allWords = self._load_('save')
 
 	def loadWords(self):
 		if not self.allWords: return []
-		weights = list(map(lambda word_weight: word_weight[1], self.allWords))
-		return random.choices(self.allWords, weights=weights, k=min(20, len(weights)))
+		wordsList = list(self.allWords.items())
+		weights = list(map(lambda word_weight: word_weight[1], wordsList))
+		withReplacement = random.choices(
+			wordsList, 
+			weights=weights, 
+			k=min(self.numWordsReview, len(weights)))
+		return list(set(withReplacement))
 			
 	def saveUpdate(self, wordList):
-		words = {}
 		for word, weight in wordList:
-			words[word] = weight
-		self.save(words)
+			self.allWords[word] = weight
+		self._save_(self.allWords, 'save.csv')
 
 
 
