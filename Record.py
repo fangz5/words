@@ -20,13 +20,10 @@ class Record(object):
 
 	def loadWords(self):
 		if not self.allWords: return []
-		wordsList = list(self.allWords.items())
-		weights = list(map(lambda word_weight: word_weight[1], wordsList))
-		withReplacement = random.choices(
-			wordsList, 
-			weights=weights, 
-			k=min(self.numWordsReview, len(weights)))
-		return list(set(withReplacement))
+		population = list(self.allWords.items())
+		weights = list(map(lambda word_weight: word_weight[1], population))
+		samplesWithReplacement = random.choices(population, weights=weights, k=self.numWordsReview)
+		return list(map(lambda pair: list(pair), set(samplesWithReplacement)))
 			
 	def saveUpdate(self, wordList):
 		for word, weight in wordList:
