@@ -31,7 +31,7 @@ def refresh():
 
 def add(button):
 	words = app.getEntry("Add Words").split()
-	sound.downloadList(words)
+	self.sound.downloadList(words)
 	for word in words:
 		unlearned.append([word, 10])
 	enable(["Next"])

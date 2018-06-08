@@ -1,6 +1,5 @@
 import os.path
 import urllib.request
-from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 
 from pygame import mixer
@@ -8,7 +7,6 @@ from pygame import mixer
 class SoundManager(object):
 	def __init__(object):		
 		mixer.init()
-		val = URLValidator()
 
 	def soundExists(self, word):
 		return os.path.isfile('sound/' + word + '.mp3')
