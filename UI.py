@@ -82,6 +82,6 @@ class UI(object):
 		
 		self.window.addButtons(["Correct", "Wrong"], self.check)
 		self.window.addButtons(["Play sound"], self.play)
-		self.disable(["Next", "Correct", "Wrong", "Play sound"])
+		self.disable(["Next", "Correct", "Wrong"])
 		
 		self.window.go()
